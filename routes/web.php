@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,6 +23,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Status Routes
+    Route::get('statuses', [StatusController::class, 'index'])->name('statuses.index');
+    Route::get('statuses/create', [StatusController::class, 'create'])->name('statuses.create');
+    Route::post('statuses', [StatusController::class, 'store'])->name('statuses.store');
+    Route::get('statuses/{status}/edit', [StatusController::class, 'edit'])->name('statuses.edit');
+    Route::put('statuses/{status}', [StatusController::class, 'update'])->name('statuses.update');
+    Route::delete('statuses/{status}', [StatusController::class, 'destroy'])->name('statuses.destroy');
+
+    
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
