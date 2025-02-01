@@ -12,7 +12,7 @@
                     v-else
                     :key="`link-${key}`"
                     class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                    :class="{ 'bg-purplium-400': link.active, 'text-white': link.active, 'dark:bg-greenium-500': link.active, 'dark:text-white': link.active}"
+                    :class="{ 'bg-purplium-500': link.active, 'text-white': link.active, 'dark:bg-greenium-500': link.active, 'dark:text-white': link.active}"
                     :href="link.url"
                 >
                     <span v-html="link.label"></span>
