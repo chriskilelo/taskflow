@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStatusRequest;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
@@ -54,9 +55,16 @@ class StatusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreStatusRequest $request)
     {
-        return  "Store function";
+        // Validate the incoming request
+        $validated = $request->validated();
+
+        // Create a new status with the validated data
+        Status::create($validated);
+
+        // Redirect to the statuses index page with a success message
+        return redirect()->route('statuses.index')->with('success', 'Status created successfully.');
     }
 
     /**
