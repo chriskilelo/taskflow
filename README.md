@@ -1,9 +1,11 @@
 
 ![TaskFlow Logo](resources/assets/images/taskflow_logo_darkmode.png)
 
-# TaskFlow 🚀
 
-Welcome to **TaskFlow**, a powerful task management application designed to help you manage your tasks effectively. Whether you're a professional, student, or anyone looking to stay organized, TaskFlow is here to make your life easier!💡
+
+# TaskFlow 💥 
+
+Welcome to **TaskFlow**, a powerful task management application designed to help you manage your tasks effectively. Whether you're a professional, student, or anyone looking to stay organized, TaskFlow is here to make your life easier!💡 Please note that this work is still under development, looking forward to finishing up all the features soon.
 
 ---
 
