@@ -112,6 +112,10 @@ class StatusController extends Controller
      */
     public function destroy(status $status)
     {
-        return "Destroy function";
+        // Soft delete the status
+        $status->delete();
+
+        // Redirect to the statuses index page with a success message
+        return redirect()->route('statuses.index')->with('success', 'Status deleted successfully.');
     }
 }
