@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStatusRequest;
+use App\Http\Requests\UpdateStatusRequest;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
@@ -80,15 +81,30 @@ class StatusController extends Controller
      */
     public function edit(status $status)
     {
-        return "Edit function";
+        // Return the Inertia response with the required data
+        return inertia()->render('Statuses/Edit', [
+            'status' => [
+                'id' => $status->id,
+                'status' => $status->status,
+                'description' => $status->description,
+                'is_active' => $status->is_active,
+            ],
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, status $status)
+    public function update(UpdateStatusRequest $request, status $status)
     {
-        return "Update function";
+        // Validate the incoming request
+        $validated = $request->validated();
+
+        // Update the status with the validated data
+        $status->update($validated);
+
+        // Redirect to the statuses index page with a success message
+        return redirect()->route('statuses.index')->with('success', 'Status updated successfully.');
     }
 
     /**
