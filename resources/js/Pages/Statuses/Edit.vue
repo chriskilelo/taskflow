@@ -48,7 +48,7 @@ const closeModal = () => {
 </script>
 
 <template>
-    <Head status="Edit Status" />
+    <Head title="Edit Status" />
     <ConsoleLayout>
         <div class="px-20 pt-14 h-screen bg-gray-100 dark:bg-gray-800">
             <div class="flex pb-7">
