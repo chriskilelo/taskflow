@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use Illuminate\Foundation\Application;
@@ -32,6 +33,14 @@ Route::middleware('auth')->group(function () {
     Route::put('statuses/{status}', [StatusController::class, 'update'])->name('statuses.update');
     Route::delete('statuses/{status}', [StatusController::class, 'destroy'])->name('statuses.destroy');
 
+    // Priority Routes
+    Route::get('priorities', [PriorityController::class, 'index'])->name('priorities.index');
+    Route::get('priorities/create', [PriorityController::class, 'create'])->name('priorities.create');
+    Route::post('priorities', [PriorityController::class, 'store'])->name('priorities.store');
+    Route::get('priorities/{priority}/edit', [PriorityController::class, 'edit'])->name('priorities.edit');
+    Route::put('priorities/{priority}', [PriorityController::class, 'update'])->name('priorities.update');
+    Route::delete('priorities/{priority}', [PriorityController::class, 'destroy'])->name('priorities.destroy');
+    
     
 });
 
