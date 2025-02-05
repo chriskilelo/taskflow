@@ -17,9 +17,10 @@ class StatusFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => fake()->word(),
-            'description' => fake()->sentence(3, true),
+            'status' => fake()->unique(true)->word(),
+            'description' => fake()->sentence(5, true),
             'is_active' => fake()->boolean(60),
+            'created_by' => 'SYSTEM FACTORY',
         ];
     }
 }
