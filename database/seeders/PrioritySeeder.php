@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Priority;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,24 +18,24 @@ class PrioritySeeder extends Seeder
                 'level' => 'Low',
                 'description' => 'Low priority',
                 'is_active' => true,
-                'created_by' => 'admin',
+                'created_by' => 'SYSTEM SEEDER',
             ],
             [
                 'level' => 'Medium',
                 'description' => 'Medium priority',
                 'is_active' => true,
-                'created_by' => 'admin',
+                'created_by' => 'SYSTEM SEEDER',
             ],
             [
                 'level' => 'High',
                 'description' => 'High priority',
                 'is_active' => true,
-                'created_by' => 'admin',
+                'created_by' => 'SYSTEM SEEDER',
             ],
         ];
 
         foreach ($priorities as $priority) {
-            \App\Models\Priority::create($priority);
+            Priority::create($priority);
         }
     }
 
