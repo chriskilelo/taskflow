@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('status', 200)->index();
+            $table->string('status', 200)->unique()->index();
             $table->string('description', 255)->nullable();
             $table->boolean('is_active')->nullable()->default(false);
             $table->string('created_by', 50);
