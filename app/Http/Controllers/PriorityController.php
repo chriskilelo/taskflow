@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePriorityRequest;
 use App\Models\Priority;
 use Illuminate\Http\Request;
 
@@ -54,9 +55,13 @@ class PriorityController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePriorityRequest $request)
     {
-        return 'Store Function';
+        // Create a new priority with the validated data
+        Priority::create($request->validated());
+
+        // Redirect to the priorities index page with a success message
+        return redirect()->route('priorities.index')->with('success', 'Priority created.');
     }
 
     /**
