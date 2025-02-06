@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePriorityRequest;
+use App\Http\Requests\UpdatePriorityRequest;
 use App\Models\Priority;
 use Illuminate\Http\Request;
 
@@ -77,15 +78,29 @@ class PriorityController extends Controller
      */
     public function edit(Priority $priority)
     {
-        return 'Edit Function';
+        return inertia()->render('Priorities/Edit', [
+            'priority' => [
+                'id' => $priority->id,
+                'level' => $priority->level,
+                'description' => $priority->description,
+                'is_active' => $priority->is_active,
+                'created_by' => $priority->created_by,
+                'created_at' => $priority->created_at,
+                'deleted_at' => $priority->deleted_at,
+            ],
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Priority $priority)
+    public function update(UpdatePriorityRequest $request, Priority $priority)
     {
-        return 'Update Function';
+        // Update the priority with the validated data
+        $priority->update($request->validated());
+
+        // Redirect to the priorities index page with a success message
+        return redirect()->route('priorities.index')->with('success', 'Priority updated.');
     }
 
     /**
