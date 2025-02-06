@@ -48,7 +48,7 @@ class PriorityController extends Controller
      */
     public function create()
     {
-        return 'Create Function';
+        return inertia()->render('Priorities/Create');
     }
 
     /**
