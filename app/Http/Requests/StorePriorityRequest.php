@@ -23,8 +23,9 @@ class StorePriorityRequest extends FormRequest
     {
         return [
             'level' => 'required|string|max:200',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'created_by' => 'required|string|max:50',
+            'is_active' => 'nullable',
         ];
     }
 
