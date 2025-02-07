@@ -12,7 +12,7 @@ import TextareaInput from "@/Components/TextareaInput.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
-const confirmingTitleDeletion = ref(false);
+const confirmingPriorityDeletion = ref(false);
 // Get the existing data from the page props
 const { props } = usePage();
 const priority = props.priority;
@@ -31,11 +31,11 @@ const update = () => {
     form.put(`/priorities/${priority.id}`);
 };
 
-const confirmTitleDeletion = () => {
-    confirmingTitleDeletion.value = true;
+const confirmPriorityDeletion = () => {
+    confirmingPriorityDeletion.value = true;
 };
 
-const deleteTitle = () => {
+const deletePriority = () => {
     form.delete(`/priorities/${priority.id}`, {
         preserveScroll: true,
         onSuccess: () => closeModal(),
@@ -44,7 +44,7 @@ const deleteTitle = () => {
 };
 
 const closeModal = () => {
-    confirmingTitleDeletion.value = false;
+    confirmingPriorityDeletion.value = false;
     form.reset();
 };
 </script>
@@ -133,7 +133,7 @@ const closeModal = () => {
                         />
                     </div>
                     <div class="flex items-center gap-4 justify-between py-10">
-                        <DangerButton @click.prevent="confirmTitleDeletion">
+                        <DangerButton @click.prevent="confirmPriorityDeletion">
                             Delete Status
                         </DangerButton>
                         <PrimaryButton :disabled="form.processing">
@@ -156,7 +156,7 @@ const closeModal = () => {
                     </div>
                     <div>
                         <Modal
-                            :show="confirmingTitleDeletion"
+                            :show="confirmingPriorityDeletion"
                             @close="closeModal"
                         >
                             <div class="py-10 flex items-center flex-col">
@@ -179,7 +179,7 @@ const closeModal = () => {
                                             'opacity-25': form.processing,
                                         }"
                                         :disabled="form.processing"
-                                        @click="deleteTitle"
+                                        @click="deletePriority"
                                     >
                                         Delete Status
                                     </DangerButton>
