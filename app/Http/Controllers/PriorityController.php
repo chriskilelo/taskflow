@@ -108,6 +108,10 @@ class PriorityController extends Controller
      */
     public function destroy(Priority $priority)
     {
-        return 'Destroy Function';
+        // Soft delete the priority
+        $priority->delete();
+
+        // Redirect to the priorities index page with a success message
+        return redirect()->route('priorities.index')->with('success', 'Priority deleted.');
     }
 }
