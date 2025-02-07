@@ -25,6 +25,7 @@ class UpdatePriorityRequest extends FormRequest
             'level' => 'required|string|max:200',
             'description' => 'nullable|string|max:255',
             'created_by' => 'required|string|max:50',
+            'is_active' => 'nullable',
         ];
     }
 
