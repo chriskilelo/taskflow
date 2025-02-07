@@ -24,6 +24,7 @@ class StoreStatusRequest extends FormRequest
         return [
             'status' => 'required|string|max:200',
             'description' => 'nullable|string|max:255',
+            'created_by' => 'required|string|max:50',
             'is_active' => 'nullable',
         ];
     }
@@ -41,6 +42,9 @@ class StoreStatusRequest extends FormRequest
             'status.max' => 'The status must not exceed 200 characters.',
             'description.string' => 'The description must be a string.',
             'description.max' => 'The description field must not exceed 255 characters.',
+            'created_by.required' => 'The created by is required.',
+            'created_by.string' => 'The created by must be a string.',
+            'created_by.max' => 'The created by must not exceed 50 characters.',
         ];
     }
 }

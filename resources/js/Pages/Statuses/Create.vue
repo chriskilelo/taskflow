@@ -7,10 +7,18 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import TextareaInput from "@/Components/TextareaInput.vue";
+import { computed } from "vue";
+
+const page = usePage();
+
+const usersEmail = computed(() => {
+    return page.props.auth?.user?.email || "No email found";
+});
 
 const form = useForm({
     status: "",
     description: "",
+    created_by: usersEmail.value,
     is_active: "",
 });
 
@@ -55,6 +63,21 @@ const store = () => {
                             <InputError
                                 class="mt-2"
                                 :message="form.errors.status"
+                            />
+                        </div>
+                        <div class="py-2 w-full md:w-1/2">
+                            <InputLabel for="created_by" value="Created By" class="hidden"/>
+                            <TextInput
+                                id="created_by"
+                                type="text"
+                                class="mt-1 block w-full hidden"
+                                v-model="form.created_by"
+                                autocomplete="created_by"
+                                :disabled="true"
+                            />
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.created_by"
                             />
                         </div>
                     </div>

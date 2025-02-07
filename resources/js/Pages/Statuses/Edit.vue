@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-import { nextTick, ref } from 'vue';
-import Modal from '@/Components/Modal.vue';
+import { nextTick, ref } from "vue";
+import Modal from "@/Components/Modal.vue";
 import ConsoleLayout from "@/Layouts/ConsoleLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -9,8 +9,8 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import TextareaInput from "@/Components/TextareaInput.vue";
-import DangerButton from '@/Components/DangerButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DangerButton from "@/Components/DangerButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 const confirmingStatusDeletion = ref(false);
 // Get the existing data from the page props
@@ -21,6 +21,8 @@ const status = props.status;
 const form = useForm({
     status: status.status || "",
     description: status.description || "",
+    created_by: status.created_by || "",
+    deleted_at: status.deleted_at || "",
     is_active: Boolean(status.is_active),
 });
 
@@ -29,7 +31,7 @@ const update = () => {
     form.put(`/statuses/${status.id}`);
 };
 
-const confirmStatusDeletion =  () => {
+const confirmStatusDeletion = () => {
     confirmingStatusDeletion.value = true;
 };
 
@@ -67,10 +69,7 @@ const closeModal = () => {
                 <form @submit.prevent="update">
                     <div class="flex flex-col md:flex-row md:gap-x-4">
                         <div class="py-2 w-full md:w-1/2">
-                            <InputLabel
-                                for="status"
-                                value="Status"
-                            />
+                            <InputLabel for="status" value="Status" />
                             <TextInput
                                 id="status"
                                 type="text"
@@ -81,6 +80,21 @@ const closeModal = () => {
                             <InputError
                                 class="mt-2"
                                 :message="form.errors.status"
+                            />
+                        </div>
+                        <div class="py-2 w-full md:w-1/2">
+                            <InputLabel for="created_by" class="hidden" value="Created By" />
+                            <TextInput
+                                id="created_by"
+                                type="text"
+                                class="mt-1 block w-full hidden"
+                                v-model="form.created_by"
+                                autocomplete="created_by"
+                                :disabled="true"
+                            />
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.created_by"
                             />
                         </div>
                     </div>
@@ -141,28 +155,37 @@ const closeModal = () => {
                         </Transition>
                     </div>
                     <div>
+                        <Modal
+                            :show="confirmingStatusDeletion"
+                            @close="closeModal"
+                        >
+                            <div class="py-10 flex items-center flex-col">
+                                <div class="p-3">
+                                    <h2
+                                        class="text-lg font-medium text-gray-900 dark:text-gray-100"
+                                    >
+                                        Are you sure you want to delete this
+                                        record?
+                                    </h2>
+                                </div>
+                                <div class="mt-6 flex">
+                                    <SecondaryButton @click="closeModal">
+                                        Cancel
+                                    </SecondaryButton>
 
-                    <Modal :show="confirmingStatusDeletion" @close="closeModal">
-                        <div class="py-10 flex items-center flex-col">
-                            <div class="p-3">
-                                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                    Are you sure you want to delete this record?
-                                </h2>
+                                    <DangerButton
+                                        class="ms-3"
+                                        :class="{
+                                            'opacity-25': form.processing,
+                                        }"
+                                        :disabled="form.processing"
+                                        @click="deleteStatus"
+                                    >
+                                        Delete Status
+                                    </DangerButton>
+                                </div>
                             </div>
-                            <div class="mt-6 flex">
-                                <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
-
-                                <DangerButton
-                                    class="ms-3"
-                                    :class="{ 'opacity-25': form.processing }"
-                                    :disabled="form.processing"
-                                    @click="deleteStatus"
-                                >
-                                    Delete Status
-                                </DangerButton>
-                            </div>
-                        </div>
-                    </Modal>
+                        </Modal>
                     </div>
                 </form>
             </div>

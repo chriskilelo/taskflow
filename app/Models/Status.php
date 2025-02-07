@@ -20,6 +20,7 @@ class Status extends Model
     protected $fillable = [
         'status',
         'description',
+        'created_by',
         'is_active'
     ];
 

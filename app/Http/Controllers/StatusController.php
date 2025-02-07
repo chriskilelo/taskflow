@@ -87,6 +87,9 @@ class StatusController extends Controller
                 'id' => $status->id,
                 'status' => $status->status,
                 'description' => $status->description,
+                'created_by' => $status->created_by,
+                'created_at' => $status->created_at,
+                'deleted_at' => $status->deleted_at,
                 'is_active' => $status->is_active,
             ],
         ]);
