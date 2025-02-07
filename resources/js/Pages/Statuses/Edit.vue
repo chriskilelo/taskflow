@@ -12,7 +12,7 @@ import TextareaInput from "@/Components/TextareaInput.vue";
 import DangerButton from '@/Components/DangerButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 
-const confirmingTitleDeletion = ref(false);
+const confirmingStatusDeletion = ref(false);
 // Get the existing data from the page props
 const { props } = usePage();
 const status = props.status;
@@ -29,11 +29,11 @@ const update = () => {
     form.put(`/statuses/${status.id}`);
 };
 
-const confirmTitleDeletion =  () => {
-    confirmingTitleDeletion.value = true;
+const confirmStatusDeletion =  () => {
+    confirmingStatusDeletion.value = true;
 };
 
-const deleteTitle = () => {
+const deleteStatus = () => {
     form.delete(`/statuses/${status.id}`, {
         preserveScroll: true,
         onSuccess: () => closeModal(),
@@ -42,7 +42,7 @@ const deleteTitle = () => {
 };
 
 const closeModal = () => {
-    confirmingTitleDeletion.value = false;
+    confirmingStatusDeletion.value = false;
     form.reset();
 };
 </script>
@@ -119,7 +119,7 @@ const closeModal = () => {
                         />
                     </div>
                     <div class="flex items-center gap-4 justify-between py-10">
-                        <DangerButton @click.prevent="confirmTitleDeletion">
+                        <DangerButton @click.prevent="confirmStatusDeletion">
                             Delete Status
                         </DangerButton>
                         <PrimaryButton :disabled="form.processing">
@@ -142,7 +142,7 @@ const closeModal = () => {
                     </div>
                     <div>
 
-                    <Modal :show="confirmingTitleDeletion" @close="closeModal">
+                    <Modal :show="confirmingStatusDeletion" @close="closeModal">
                         <div class="py-10 flex items-center flex-col">
                             <div class="p-3">
                                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -156,7 +156,7 @@ const closeModal = () => {
                                     class="ms-3"
                                     :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing"
-                                    @click="deleteTitle"
+                                    @click="deleteStatus"
                                 >
                                     Delete Status
                                 </DangerButton>
