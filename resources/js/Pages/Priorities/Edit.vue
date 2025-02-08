@@ -83,11 +83,11 @@ const closeModal = () => {
                             />
                         </div>
                         <div class="py-2 w-full md:w-1/2">
-                            <InputLabel for="level" value="Created By" />
+                            <InputLabel for="level" value="Created By" class="hidden"/>
                             <TextInput
                                 id="created_by"
                                 type="text"
-                                class="mt-1 block w-full"
+                                class="mt-1 w-full hidden"
                                 v-model="form.created_by"
                                 autocomplete="created_by"
                                 :disabled="true"
