@@ -70,7 +70,7 @@ const store = () => {
                             <TextInput
                                 id="created_by"
                                 type="text"
-                                class="mt-1 block w-full hidden"
+                                class="mt-1 w-full hidden"
                                 v-model="form.created_by"
                                 autocomplete="created_by"
                                 :disabled="true"
