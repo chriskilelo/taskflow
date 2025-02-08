@@ -87,6 +87,7 @@ const reset = () => {
                             <th scope="col" class="px-6 py-3">Name</th>
                             <th scope="col" class="px-6 py-3">Description</th>
                             <th scope="col" class="px-6 py-3">Status</th>
+                            <th scope="col" class="px-6 py-3">Created By</th>
                             <th scope="col" class="px-6 py-3">Created At</th>
                         </tr>
                     </thead>
@@ -134,6 +135,14 @@ const reset = () => {
                                     </div>
                                 </Link>
                             </td>
+                            <td class="px-6 py-4">
+                                <Link
+                                    class="flex items-center"
+                                    :href="`/statuses/${status.id}/edit`"
+                                >
+                                    {{ status.created_by }}
+                                </Link>
+                            </td>                            
                             <td class="px-6 py-4">
                                 <Link
                                     class="flex items-center font-semibold text-blue-600 dark:text-blue-500 hover:text-purplium-700 hover:dark:text-greenium-400"

@@ -33,6 +33,7 @@ class StatusController extends Controller
                     'description' => $status->description,
                     'is_active' => $status->is_active,
                     'created_at' => $status->created_at,
+                    'created_by' => $status->created_by,
                     'deleted_at' => $status->deleted_at,
                 ];
             });
