@@ -28,7 +28,7 @@ class ProjectController extends Controller
                 return [
                     'id' => $project->id,
                     'name' => $project->name,
-                    'description' => $project->description,
+                    'description' => shortenString($project->description, 40),
                     'status' => $project->status,
                     'is_active' => $project->is_active,
                     'created_by' => $project->created_by,
