@@ -7,7 +7,19 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import TextareaInput from "@/Components/TextareaInput.vue";
-import { computed } from "vue";
+import CustomDropdown from "@/Components/CustomDropdown.vue";
+import { computed, ref } from "vue";
+
+// Props from parent component or page
+const props = defineProps({
+    statusTypes: {
+        type: Array,
+        required: true,
+    },
+});
+
+// Holds the selected status value
+const selectedStatus = ref("");
 
 const page = usePage();
 
@@ -52,7 +64,7 @@ const store = () => {
             <div class="max-w-3xl rounded-md">
                 <form @submit.prevent="store">
                     <div class="flex flex-col md:flex-row md:gap-x-4">
-                        <div class="py-2 w-full">
+                        <div class="py-2 w-full md:w-1/2">
                             <InputLabel for="name" value="Project Name" />
                             <TextInput
                                 id="name"
@@ -64,6 +76,22 @@ const store = () => {
                             <InputError
                                 class="mt-2"
                                 :message="form.errors.name"
+                            />
+                        </div>
+                        <div class="py-2 w-full md:w-1/2">
+                            <InputLabel for="status" value="Project Status" />
+                            <CustomDropdown v-model="form.status">
+                                <option
+                                    v-for="status in statusTypes"
+                                    :key="status"
+                                    :value="status"
+                                >
+                                    {{ status }}
+                                </option>
+                            </CustomDropdown>
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.status"
                             />
                         </div>
                     </div>
@@ -88,21 +116,11 @@ const store = () => {
                     </div>
                     <div class="flex flex-col md:flex-row md:gap-x-4">
                         <div class="py-2 w-full md:w-1/2">
-                            <InputLabel for="status" value="Status" />
-                            <TextInput
-                                id="status"
-                                type="text"
-                                class="mt-1 w-full"
-                                v-model="form.status"
-                                autocomplete="status"
+                            <InputLabel
+                                for="created_by"
+                                value="Created By"
+                                class="hidden"
                             />
-                            <InputError
-                                class="mt-2"
-                                :message="form.errors.status"
-                            />
-                        </div>
-                        <div class="py-2 w-full md:w-1/2">
-                            <InputLabel for="created_by" value="Created By" class="hidden"/>
                             <TextInput
                                 id="created_by"
                                 type="text"
