@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -50,7 +52,12 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return inertia()->render('Projects/Create');
+        // Get a list of status types for the Status Dropdown
+        $statusTypes = Status::where('is_active', true)->distinct()->pluck('status');
+        // Pass the status types into the Create view
+        return inertia()->render('Projects/Create', [
+            'statusTypes' => $statusTypes,
+        ]);
     }
 
     /**
@@ -62,7 +69,7 @@ class ProjectController extends Controller
         Project::create($request->validated());
 
         // Redirect to the projects index page with a success message
-        return redirect()->route('projects.index')->with('success', 'Project created.');        
+        return redirect()->route('projects.index')->with('success', 'Project created.');
     }
 
     /**
@@ -78,15 +85,34 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return 'Edit Function';
+        // Get a list of status types for the Status Dropdown
+        $statusTypes = Status::where('is_active', true)->distinct()->pluck('status');
+        // Render the Edit.vue page while passing in all required properties
+        return inertia()->render('Projects/Edit', [
+            'project' => [
+                'id' => $project->id,
+                'name' => $project->name,
+                'description' => $project->description,
+                'status' => $project->status,
+                'is_active' => $project->is_active,
+                'created_by' => $project->created_by,
+                'created_at' => $project->created_at,
+                'deleted_at' => $project->deleted_at,
+            ],
+            'statusTypes' => $statusTypes,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        return 'Update Function';
+        // Update the project with the validated data
+        $project->update($request->validated());
+
+        // Redirect to the projects index page with a success message
+        return redirect()->route('projects.index')->with('success', 'Project updated.');
     }
 
     /**
