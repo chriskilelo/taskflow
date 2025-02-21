@@ -19,7 +19,8 @@ import { Head, Link } from "@inertiajs/vue3";
             <div
                 class="mt-6 flex flex-col justify-start items-center pl-4 w-full border-gray-600 border-b space-y-3 pb-5"
             >
-                <Link href="/dashboard"
+                <Link
+                    href="/dashboard"
                     class="flex jusitfy-start items-center space-x-6 w-full focus:outline-none focus:text-greenium-400 text-white rounded"
                 >
                     <svg
@@ -61,7 +62,8 @@ import { Head, Link } from "@inertiajs/vue3";
                     </svg>
                     <p class="text-base leading-4">Dashboard</p>
                 </Link>
-                <Link href="#"
+                <Link
+                    href="#"
                     class="flex jusitfy-start items-center space-x-6 w-full focus:outline-none focus:text-greenium-400 text-white rounded"
                 >
                     <svg
@@ -119,7 +121,8 @@ import { Head, Link } from "@inertiajs/vue3";
                     id="menu1"
                     class="flex justify-start flex-col w-full md:w-auto items-start pb-1"
                 >
-                    <Link href="/statuses"
+                    <Link
+                        href="/statuses"
                         class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52"
                     >
                         <svg
@@ -140,7 +143,8 @@ import { Head, Link } from "@inertiajs/vue3";
                         </svg>
                         <p class="text-base leading-4">Statuses</p>
                     </Link>
-                    <Link href="/priorities"
+                    <Link
+                        href="/priorities"
                         class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white focus:border-greenium-400 hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52"
                     >
                         <svg
@@ -181,7 +185,8 @@ import { Head, Link } from "@inertiajs/vue3";
                         </svg>
                         <p class="text-base leading-4">Priorities</p>
                     </Link>
-                    <Link href="/projects"
+                    <Link
+                        href="/projects"
                         class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white focus:border-greenium-400 hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52"
                     >
                         <svg
@@ -221,7 +226,49 @@ import { Head, Link } from "@inertiajs/vue3";
                             />
                         </svg>
                         <p class="text-base leading-4">Projects</p>
-                    </Link>                    
+                    </Link>
+                    <Link
+                        href="/notifications"
+                        class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white focus:border-greenium-400 hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52"
+                    >
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M8 19C10.2091 19 12 17.2091 12 15C12 12.7909 10.2091 11 8 11C5.79086 11 4 12.7909 4 15C4 17.2091 5.79086 19 8 19Z"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M10.85 12.15L19 4"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M18 5L20 7"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M15 8L17 10"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                        <p class="text-base leading-4">Notifications</p>
+                    </Link>
                 </div>
             </div>
         </div>
