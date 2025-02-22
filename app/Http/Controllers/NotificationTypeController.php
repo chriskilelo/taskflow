@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreNotificationTypeRequest;
 use App\Models\NotificationType;
 use Illuminate\Http\Request;
 
@@ -49,15 +50,20 @@ class NotificationTypeController extends Controller
      */
     public function create()
     {
-        return 'Create Function';
+        // Use Inertia to render the 'Create' notification types view
+        return inertia()->render('NotificationTypes/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreNotificationTypeRequest $request)
     {
-        return 'Store Function';
+        // Create a new notification type with the validated data
+        NotificationType::create($request->validated());
+
+        // Redirect to the notification types index page with a success message
+        return redirect()->route('notification-types.index')->with('success', 'Notification Type created.');
     }
 
     /**
