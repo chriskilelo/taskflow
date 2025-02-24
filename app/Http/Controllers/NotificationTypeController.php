@@ -111,6 +111,10 @@ class NotificationTypeController extends Controller
      */
     public function destroy(NotificationType $notificationType)
     {
-        return 'Destroy Function';
+        // Soft delete the notification type
+        $notificationType->delete();
+
+        // Redirect to the notification types index page with a success message
+        return redirect()->route('notification-types.index')->with('success', 'Notification Type deleted.');
     }
 }
