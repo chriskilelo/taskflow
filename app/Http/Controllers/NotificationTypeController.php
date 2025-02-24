@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNotificationTypeRequest;
+use App\Http\Requests\UpdateNotificationTypeRequest;
 use App\Models\NotificationType;
 use Illuminate\Http\Request;
 
@@ -79,15 +80,30 @@ class NotificationTypeController extends Controller
      */
     public function edit(NotificationType $notificationType)
     {
-        return 'Edit Function';
+        // Use Inertia to render the 'Edit' notification types view
+        return inertia()->render('NotificationTypes/Edit', [
+            'notification_type' => [
+                'id' => $notificationType->id,
+                'type' => $notificationType->type,
+                'description' => $notificationType->description,
+                'is_active' => $notificationType->is_active,
+                'created_by' => $notificationType->created_by,
+                'created_at' => $notificationType->created_at,
+                'deleted_at' => $notificationType->deleted_at,
+            ],
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, NotificationType $notificationType)
+    public function update(UpdateNotificationTypeRequest $request, NotificationType $notificationType)
     {
-        return 'Update Function';
+        // Update the notification type with the validated data
+        $notificationType->update($request->validated());
+
+        // Redirect to the notification types index page with a success message
+        return redirect()->route('notification-types.index')->with('success', 'Notification Type updated.');
     }
 
     /**
