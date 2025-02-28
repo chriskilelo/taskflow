@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationStatusController;
 use App\Http\Controllers\NotificationTypeController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\ProfileController;
@@ -67,6 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::get('notification-types/{notificationType}/edit', [NotificationTypeController::class, 'edit'])->name('notification-types.edit');
     Route::put('notification-types/{notificationType}', [NotificationTypeController::class, 'update'])->name('notification-types.update');
     Route::delete('notification-types/{notificationType}', [NotificationTypeController::class, 'destroy'])->name('notification-types.destroy');
+
+    // Notification Statuses Routes
+    Route::get('notification-statuses', [NotificationStatusController::class, 'index'])->name('notification-statuses.index');
+    Route::get('notification-statuses/create', [NotificationStatusController::class, 'create'])->name('notification-statuses.create');
+    Route::post('notification-statuses', [NotificationStatusController::class, 'store'])->name('notification-statuses.store');
+    Route::get('notification-statuses/{notificationStatus}/edit', [NotificationStatusController::class, 'edit'])->name('notification-statuses.edit');
+    Route::put('notification-statuses/{notificationStatus}', [NotificationStatusController::class, 'update'])->name('notification-statuses.update');
+    Route::delete('notification-statuses/{notificationStatus}', [NotificationStatusController::class, 'destroy'])->name('notification-statuses.destroy');
 
 });
 
