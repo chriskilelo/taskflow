@@ -77,7 +77,17 @@ class NotificationStatusController extends Controller
      */
     public function edit(NotificationStatus $notificationStatus)
     {
-        return "Edit Function";
+        return inertia()->render('NotificationStatuses/Edit', [
+            'notification_status' => [
+                'id' => $notificationStatus->id,
+                'status' => $notificationStatus->status,
+                'description' => $notificationStatus->description,
+                'is_active' => $notificationStatus->is_active,
+                'created_by' => $notificationStatus->created_by,
+                'created_at' => $notificationStatus->created_at,
+                'deleted_at' => $notificationStatus->deleted_at,
+            ],
+        ]);
     }
 
     /**
@@ -85,7 +95,11 @@ class NotificationStatusController extends Controller
      */
     public function update(UpdateNotificationStatusRequest $request, NotificationStatus $notificationStatus)
     {
-        return "Update Function";
+        // Update the notification status with the validated data
+        $notificationStatus->update($request->validated());
+
+        // Redirect to the notification statuses index page with a success message
+        return redirect()->route('notification-statuses.index')->with('success', 'Notification status updated successfully.');
     }
 
     /**
