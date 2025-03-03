@@ -49,7 +49,7 @@ class NotificationStatusController extends Controller
      */
     public function create()
     {
-        return "Create Function";
+        return inertia()->render('NotificationStatuses/Create');
     }
 
     /**
