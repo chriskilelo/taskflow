@@ -107,6 +107,10 @@ class NotificationStatusController extends Controller
      */
     public function destroy(NotificationStatus $notificationStatus)
     {
-        return "Destroy Function";
+        // Soft delete the notification status
+        $notificationStatus->delete();
+
+        // Redirect to the notification statuses index page with a success message
+        return redirect()->route('notification-statuses.index')->with('success', 'Notification status deleted successfully.');
     }
 }
