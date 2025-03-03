@@ -57,7 +57,11 @@ class NotificationStatusController extends Controller
      */
     public function store(StoreNotificationStatusRequest $request)
     {
-        return "Store Function";
+        // Create a new notification status with the validated data
+        NotificationStatus::create($request->validated());
+
+        // Redirect to the notification statuses index page with a success message
+        return redirect()->route('notification-statuses.index')->with('success', 'Notification status created successfully.');
     }
 
     /**
