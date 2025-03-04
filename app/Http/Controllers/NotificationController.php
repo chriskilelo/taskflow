@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreNotificationRequest;
 use App\Models\Notification;
+use App\Models\NotificationStatus;
+use App\Models\NotificationType;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -57,15 +60,27 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        return 'Create Function';
+        //Fetch all the Active notification types - for the notification types dropdown
+        $notificationTypes = NotificationType::where('is_active', true)->distinct()->pluck('type');
+        //Fetch all the Active notification statuses - for the notification status dropdown
+        $notificationStatuses = NotificationStatus::where('is_active', true)->distinct()->pluck('status');
+        // Use Inertia to render the 'Create' notifications view
+        return inertia()->render('Notifications/Create', [
+            'notificationTypes' => $notificationTypes,
+            'notificationStatuses' => $notificationStatuses,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreNotificationRequest $request)
     {
-        return 'Store Function';
+        // Create a new notification with the validated data
+        Notification::create($request->validated());
+
+        // Redirect to the notifications index page with a success message
+        return redirect()->route('notifications.index')->with('success', 'Notification created successfully.');
     }
 
     /**
