@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNotificationRequest;
+use App\Http\Requests\UpdateNotificationRequest;
 use App\Models\Notification;
 use App\Models\NotificationStatus;
 use App\Models\NotificationType;
@@ -96,15 +97,44 @@ class NotificationController extends Controller
      */
     public function edit(Notification $notification)
     {
-        return 'Edit Function';
+        //Fetch all the Active notification types - for the notification types dropdown
+        $notificationTypes = NotificationType::where('is_active', true)->distinct()->pluck('type');
+        //Fetch all the Active notification statuses - for the notification status dropdown
+        $notificationStatuses = NotificationStatus::where('is_active', true)->distinct()->pluck('status');
+        // Use Inertia to render the 'Edit' notifications view
+        return inertia()->render('Notifications/Edit', [
+            'notification' => [
+                'id' => $notification->id,
+                'user_id' => $notification->user_id,
+                'subject' => $notification->subject,
+                'message' => $notification->message,
+                'type' => $notification->type,
+                'status' => $notification->status,
+                'created_by' => $notification->created_by,
+                'send_attempts' => $notification->send_attempts,
+                'scheduled_at' => $notification->scheduled_at,
+                'sent_at' => $notification->sent_at,
+                'is_active' => $notification->is_active,
+                'is_sent' => $notification->is_sent,
+                'has_error' => $notification->has_error,
+                'failed_at' => $notification->failed_at,
+                'error_message' => $notification->error_message,
+            ],
+            'notification_types' => $notificationTypes,
+            'notification_statuses' => $notificationStatuses,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Notification $notification)
+    public function update(UpdateNotificationRequest $request, Notification $notification)
     {
-        return 'Update Function';
+        // Update the notification with the validated data
+        $notification->update($request->validated());
+
+        // Redirect to the notifications index page with a success message
+        return redirect()->route('notifications.index')->with('success', 'Notification updated successfully.');
     }
 
     /**
