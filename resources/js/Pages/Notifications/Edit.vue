@@ -342,9 +342,11 @@ const closeModal = () => {
                             :message="form.errors.is_active"
                         />
                     </div>
-                                     <div class="flex items-center gap-4 justify-between py-10">
-                        <DangerButton @click.prevent="confirmNotificationDeletion">
-                            Delete Notification Status
+                    <div class="flex items-center gap-4 justify-between py-10">
+                        <DangerButton
+                            @click.prevent="confirmNotificationDeletion"
+                        >
+                            Delete Notification
                         </DangerButton>
                         <PrimaryButton :disabled="form.processing">
                             Save Changes
@@ -389,14 +391,14 @@ const closeModal = () => {
                                             'opacity-25': form.processing,
                                         }"
                                         :disabled="form.processing"
-                                        @click="deleteStatus"
+                                        @click="deleteNotification"
                                     >
-                                        Delete Notification Status
+                                        Delete Notification
                                     </DangerButton>
                                 </div>
                             </div>
                         </Modal>
-                    </div>   
+                    </div>
                 </form>
             </div>
         </div>
