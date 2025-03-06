@@ -142,6 +142,10 @@ class NotificationController extends Controller
      */
     public function destroy(Notification $notification)
     {
-        return 'Destroy Function';
+        // Soft delete the notification
+        $notification->delete();
+
+        // Redirect to the notifications index page with a success message
+        return redirect()->route('notifications.index')->with('success', 'Notification deleted successfully.');
     }
 }
