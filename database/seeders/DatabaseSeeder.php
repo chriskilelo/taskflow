@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -18,10 +19,10 @@ class DatabaseSeeder extends Seeder
          *  Uncomment the following lines to seed the database with sample data.
          * Adjust the number passed to the factory to determine the number of records created.
          **/ 
-        User::factory(10)->create();
+        $users = User::factory(10)->create();
         // Status::factory(40)->create();
         // Priority::factory(40)->create();
-        // Project::factory(400)->create();
+        Project::factory(15)->create();
         // Notification::factory(50)->create();
 
         $this->call([
